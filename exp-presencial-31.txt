@@ -54,3 +54,13 @@ pedrozegers-# values
 pedrozegers-# ('Fede', 'fede@bci.cl', 'Lara');
 
 12-. Seleccionar la cantidad de llamados de cada uno de los usuarios (nombre de usuario y cantidad de llamadas).
+pedrozegers=# select first_name, count(phone) from users inner join calls on (users.id = calls.user_id) group by first_name;
+
+13-. Seleccionar los llamados del usuario llamado Carlos ordenados por fecha en orden descendente.
+pedrozegers=# select first_name, date from users inner join calls on (users.id = calls.user_id) where first_name = 'Carlos' order by date desc;
+
+13.1 Nuevos cambios solicitados por cliente.
+"Necesito agregar a la base una tabla de auditoría que registre el motivo del borrado de una llamada y el usuario que lo efectuó."
+pedrozegers=# create table audits (id serial primary key, reason varchar(200), user_id integer references users(id), call_id integer references calls(id));
+
+14-. Dibujo
